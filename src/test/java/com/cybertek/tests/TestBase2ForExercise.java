@@ -1,5 +1,7 @@
 package com.cybertek.tests;
 
+
+import com.cybertek.pages.LoginPage;
 import com.cybertek.utilities.ConfigurationReader;
 import com.cybertek.utilities.Driver;
 import org.openqa.selenium.By;
@@ -29,12 +31,18 @@ public class TestBase2ForExercise {
         wait = new WebDriverWait(driver,10);
 
         driver.get(ConfigurationReader.get("url"));
-        String username = ConfigurationReader.get("storemanager_username");
+
+
+       /* String username = ConfigurationReader.get("storemanager_username");
         String password = ConfigurationReader.get("storemanager_password");
 
         driver.findElement(By.name("_username")).sendKeys(username);
         driver.findElement(By.cssSelector("[type='password']")).sendKeys(password);
         driver.findElement(By.cssSelector("#_submit")).click();
+        */
+
+        LoginPage.loginAsUser("storemanager");
+
         Thread.sleep(6000);
 
         //locate the Fleet module
