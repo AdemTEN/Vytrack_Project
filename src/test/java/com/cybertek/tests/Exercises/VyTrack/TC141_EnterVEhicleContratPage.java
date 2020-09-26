@@ -1,6 +1,7 @@
 package com.cybertek.tests.Exercises.VyTrack;
 
 import com.cybertek.tests.TestBase2ForExercise;
+import com.cybertek.utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -28,14 +29,11 @@ public class TC141_EnterVEhicleContratPage extends TestBase2ForExercise {
                                  String invoiceDate, String  startDate, String ExpirationDate,   String  vendor, String Driver, String contract, String terms) throws InterruptedException {
         WebElement createButton = driver.findElement(By.cssSelector("[class='btn main-group btn-primary pull-right ']"));
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click();", createButton);
+        BrowserUtils.clickWithJS(createButton);
 
         WebElement type =   driver.findElement(By.xpath("//*[.='Choose a value...']"));
-       /* WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.visibilityOf(type));
-        type.click();
-        */
-        jse.executeScript("arguments[0].click();", type);
+
+        BrowserUtils.clickWithJS(type);
         WebElement type2 = driver.findElement(By.name("custom_entity_type[Type]"));
         Select typeDropdown = new Select(type2);
         typeDropdown.selectByValue("cash");
@@ -56,8 +54,10 @@ public class TC141_EnterVEhicleContratPage extends TestBase2ForExercise {
        driver.findElement(By.xpath("//input[contains(@id,'date_selector_custom_entity_type_ContractStartDate-uid-')]")).sendKeys(startDate);
         driver.findElement(By.xpath("//input[contains(@id,'date_selector_custom_entity_type_ContractExpirationDate-uid-')]")).sendKeys(ExpirationDate);
 
-        Thread.sleep(30000);
-        driver.findElement(By.cssSelector("[name='custom_entity_type[Vendor]']")).sendKeys(vendor);
+
+        WebElement vendorInputBox = driver.findElement(By.cssSelector("[name='custom_entity_type[Vendor]']"));
+        BrowserUtils.waitForClickablility(vendorInputBox,30);
+        vendorInputBox.sendKeys(vendor);
         driver.findElement(By.cssSelector("[name='custom_entity_type[Driver]")).sendKeys(Driver);
         driver.findElement(By.cssSelector("[name='custom_entity_type[ContractReference]']")).sendKeys(contract);
         driver.findElement(By.cssSelector("[name='custom_entity_type[TermsandConditions]']")).sendKeys(terms);
@@ -67,7 +67,7 @@ public class TC141_EnterVEhicleContratPage extends TestBase2ForExercise {
         typeDropdown.selectByValue("active");
 
         WebElement saveButton = driver.findElement(By.cssSelector(".btn.btn-success.action-button"));
-        jse.executeScript("arguments[0].click();",saveButton);
+        BrowserUtils.clickWithJS(saveButton);
 
         WebElement moreAction = driver.findElement(By.xpath("//a[@class='btn dropdown-toggle']"));
         Assert.assertTrue(moreAction.isDisplayed());
@@ -77,7 +77,7 @@ public class TC141_EnterVEhicleContratPage extends TestBase2ForExercise {
         String actualResult = head.getText();
         Assert.assertEquals(actualResult,expectedResult);
 
-        Thread.sleep(10000);
+        BrowserUtils.waitFor(10);
 
         WebElement vehicle_contract = driver.findElement(By.linkText("Vehicle Contract"));
         jse.executeScript("arguments[0].click();",vehicle_contract);

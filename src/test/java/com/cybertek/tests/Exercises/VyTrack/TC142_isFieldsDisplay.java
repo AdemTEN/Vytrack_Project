@@ -1,6 +1,7 @@
 package com.cybertek.tests.Exercises.VyTrack;
 
 import com.cybertek.tests.TestBase2ForExercise;
+import com.cybertek.utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -16,13 +17,15 @@ public class TC142_isFieldsDisplay extends TestBase2ForExercise {
     public void isDisplayAllSelectedFields() throws InterruptedException {
 
         WebElement createButton = driver.findElement(By.cssSelector("[class='btn main-group btn-primary pull-right ']"));
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click();", createButton);
+        BrowserUtils.clickWithJS(createButton);
+
+
 
         //Type
         WebElement typeOption = driver.findElement(By.cssSelector("[name='custom_entity_type[Type]']"));
-        jse.executeScript("arguments[0].click();", typeOption);
-        Thread.sleep(3000);
+        BrowserUtils.clickWithJS(typeOption);
+       BrowserUtils.waitFor(3);
+        //Thread.sleep(3000);
 
         List<WebElement> options = driver.findElements(By.xpath("//select[@name='custom_entity_type[Type]']/option"));
 
@@ -36,8 +39,7 @@ public class TC142_isFieldsDisplay extends TestBase2ForExercise {
 
         //Recurring Cost Amount
         WebElement costAmountOptions = driver.findElement(By.xpath("//select[@name='custom_entity_type[RecurringCostAm]']"));
-        jse.executeScript("arguments[0].click();", costAmountOptions);
-
+        BrowserUtils.clickWithJS(costAmountOptions);
         List<WebElement> elementsOfCostAmount = driver.findElements(By.xpath("//select[@name='custom_entity_type[RecurringCostAm]']/option"));
 
         for (WebElement webElement : elementsOfCostAmount) {
@@ -48,16 +50,18 @@ public class TC142_isFieldsDisplay extends TestBase2ForExercise {
 
         Select costOptions = new Select(costAmountOptions);
         costOptions.selectByValue("monthly");
-        Thread.sleep(30000);
+        BrowserUtils.waitFor(3);
+
 
         for(int i = 0; i<10;i++){
-            Thread.sleep(2000);
+           BrowserUtils.waitFor(3);
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
             jse.executeScript("window.scrollBy(0,250)");
         }
 
         //Status
         WebElement status = driver.findElement(By.xpath("//select[@name='custom_entity_type[Status]']"));
-        jse.executeScript("arguments[0].click();", status);
+        BrowserUtils.clickWithJS(status);
 
         List<WebElement> statusOptions = driver.findElements(By.xpath("//select[@name='custom_entity_type[Status]']/option"));
         statusOptions.forEach(n -> Assert.assertTrue(n.isDisplayed()));
