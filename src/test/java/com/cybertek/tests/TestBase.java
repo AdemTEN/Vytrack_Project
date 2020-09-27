@@ -25,7 +25,7 @@ public class TestBase {
         actions = new Actions(driver);
         wait = new WebDriverWait(driver,10);
         driver.get(ConfigurationReader.get("url"));
-        LoginPage.loginAsUser("storemanager");
+
 
 
     }

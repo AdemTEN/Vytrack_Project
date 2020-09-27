@@ -2,6 +2,7 @@ package com.cybertek.tests.Exercises.VyTrack;
 
 import com.cybertek.pages.CalendarEventsPage;
 import com.cybertek.pages.CreateCalendarEventsPage;
+import com.cybertek.pages.LoginPage;
 import com.cybertek.tests.TestBase;
 import com.cybertek.utilities.BrowserUtils;
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ public class TC_CalendarEventPage extends TestBase {
 
     @Test
     public void test1(){
+        LoginPage.loginAsUser("storemanager");
 
         CalendarEventsPage calendar = new CalendarEventsPage();
 
