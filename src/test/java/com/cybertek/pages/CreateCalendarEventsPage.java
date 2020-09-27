@@ -54,6 +54,18 @@ public class CreateCalendarEventsPage extends BasePage {
     @FindBy(xpath = "//body[@id='tinymce']")
     public WebElement description;
 
+    @FindBy(xpath = "//option[contains(text(),'Daily')]")
+    public WebElement daily;
+
+    @FindBy(xpath = "//option[contains(text(),'Weekly')]")
+    public WebElement weekly;
+
+    @FindBy(xpath = "//option[contains(text(),'Monthly')]")
+    public WebElement monthly;
+
+    @FindBy(xpath = "//option[contains(text(),'Yearly')]")
+    public WebElement yearly;
+
 
 
 
