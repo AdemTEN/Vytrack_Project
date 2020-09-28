@@ -2,35 +2,58 @@ package com.cybertek.tests.Exercises.VyTrack;
 
 import com.cybertek.pages.CalendarEventsPage;
 import com.cybertek.pages.CreateCalendarEventsPage;
+import com.cybertek.pages.DashboardPage;
 import com.cybertek.pages.LoginPage;
 import com.cybertek.tests.TestBase;
 import com.cybertek.utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TC_CalendarEventPage extends TestBase {
 
     @Test
     public void test1(){
-        LoginPage.loginAsUser("storemanager");
 
-        CalendarEventsPage calendar = new CalendarEventsPage();
+        LoginPage.loginAsUser("driver");
 
-        calendar.navigateToModule("Activities", "Calendar Events");
-        BrowserUtils.clickWithJS(calendar.createCalendarEvent);
+        DashboardPage dashboardPage = new DashboardPage();
+        dashboardPage.waitUntilLoaderScreenDisappear();
+        dashboardPage.navigateToModule("Activities", "Calendar Events");
 
-        CreateCalendarEventsPage createCalendar = new CreateCalendarEventsPage();
+        CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
+        BrowserUtils.waitFor(5);
+        calendarEventsPage.createCalendarEvent.click();
 
-        BrowserUtils.waitForPageToLoad(15);
-        createCalendar.repeatOptionsList().selectByVisibleText("cyber tek");
+        CreateCalendarEventsPage createCalendarEventsPage = new CreateCalendarEventsPage();
 
+        createCalendarEventsPage.repeat.click();
 
-        driver.findElement(By.name("oro_calendar_event_form[title]")).sendKeys("a");
+        Select repeatDropdown = createCalendarEventsPage.repeatOptionsList();
+        List<WebElement> options = repeatDropdown.getOptions();
 
-        //createCalendar.title.sendKeys("McLaren");
-        //createCalendar.description.sendKeys("extra information");
+        repeatDropdown.selectByVisibleText("Weekly");
+        BrowserUtils.waitFor(2);
+       /*
+        createCalendarEventsPage.repeatEvery.click();
+        createCalendarEventsPage.repeatEvery.clear();
 
+        createCalendarEventsPage.repeatEvery.sendKeys("3");
+        */
+
+        Select repeatOnDropdown = createCalendarEventsPage.repeatOnList();
+        List<WebElement> optionsRepeatOn = repeatOnDropdown.getOptions();
+
+        List<String> expectedRepetOnList = Arrays.asList("S","M","T","W","T","F","S");
+
+        List<String> actualRepeatOnList = BrowserUtils.getElementsText(optionsRepeatOn);
+        Assert.assertEquals(actualRepeatOnList, expectedRepetOnList);
 
 
 

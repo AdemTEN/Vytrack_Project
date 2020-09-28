@@ -66,11 +66,24 @@ public class CreateCalendarEventsPage extends BasePage {
     @FindBy(xpath = "//option[contains(text(),'Yearly')]")
     public WebElement yearly;
 
+    @FindBy(xpath = "//button[@class='btn btn-success action-button']")
+    public WebElement saveAndClose;
+
+    @FindBy(xpath = "//input[@name='temp-validation-name-126']")
+    public WebElement repeatEvery;
+
+    @FindBy(xpath = "//select[@name='recurrence[dayOfWeek]']")
+    public WebElement repeatOnOptions;
+
 
 
 
     public Select repeatOptionsList(){
         return new Select(repeatOptions);
+    }
+
+    public Select repeatOnList(){
+        return new Select(repeatOnOptions);
     }
 
 

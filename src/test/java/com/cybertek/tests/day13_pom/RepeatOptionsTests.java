@@ -131,7 +131,7 @@ public class RepeatOptionsTests extends TestBase {
         calendarEventsPage.createCalendarEvent.click();
 
         CreateCalendarEventsPage createCalendarEventsPage = new CreateCalendarEventsPage();
-        calendarEventsPage.waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitFor(5);
         createCalendarEventsPage.repeat.click();
 
         Select dropDownOptions = createCalendarEventsPage.repeatOptionsList();
@@ -145,6 +145,8 @@ public class RepeatOptionsTests extends TestBase {
 
         Assert.assertTrue(createCalendarEventsPage.weekly.isSelected());
         Assert.assertFalse(createCalendarEventsPage.daily.isSelected());
+
+        BrowserUtils.clickWithJS(createCalendarEventsPage.saveAndClose);
 
     }
 
