@@ -78,6 +78,9 @@ public class CreateCalendarEventsPage extends BasePage {
     @FindBy(xpath = "/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[3]/form[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/fieldset[1]/div[2]/div[2]/div[2]/div[4]/div[1]/div[2]/div[2]/div[1]/select[1]")
     public WebElement repeatOnMonthlyOptions;
 
+    @FindBy(xpath = "//select[@name='temp-validation-name-126']/option[contains(text(),'First')]")
+    public WebElement First;
+
 
 
     public Select repeatOptionsList(){

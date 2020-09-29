@@ -75,7 +75,7 @@ public class TC_CalendarEventPage extends TestBase {
         dashboardPage.navigateToModule("Activities", "Calendar Events");
 
         CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitFor(4);
         calendarEventsPage.createCalendarEvent.click();
 
         CreateCalendarEventsPage createCalendarEventsPage = new CreateCalendarEventsPage();
@@ -87,11 +87,20 @@ public class TC_CalendarEventPage extends TestBase {
         Select monthlyRepeatOnDropdown = createCalendarEventsPage.repeatOnMonthlyList();
         List<WebElement> monthlyOptions = monthlyRepeatOnDropdown.getOptions();
         for (WebElement monthlyOption : monthlyOptions) {
-            System.out.println("monthlyOption.getText() = " + monthlyOption.getText());
+            System.out.println("monthlyOption.getText() = " + monthlyOption.getText().trim());
         }
         List<String> expectedList = Arrays.asList("Day","━━━━━━━━━","First","Second", "Third","Fourth", "Last");
+
         List<String> actualList = BrowserUtils.getElementsText(monthlyOptions);
         Assert.assertEquals(actualList,expectedList);
+
+       /*
+        monthlyRepeatOnDropdown.selectByValue("1");
+        BrowserUtils.waitFor(3);
+        Assert.assertTrue(createCalendarEventsPage.First.isSelected());
+*/
+
+
 
 
     }
