@@ -73,8 +73,10 @@ public class CreateCalendarEventsPage extends BasePage {
     public WebElement repeatEvery;
 
     @FindBy(xpath = "//select[@name='recurrence[dayOfWeek]']")
-    public WebElement repeatOnOptions;
+    public WebElement repeatOnDailyOptions;
 
+    @FindBy(xpath = "/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[3]/form[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/fieldset[1]/div[2]/div[2]/div[2]/div[4]/div[1]/div[2]/div[2]/div[1]/select[1]")
+    public WebElement repeatOnMonthlyOptions;
 
 
 
@@ -83,7 +85,11 @@ public class CreateCalendarEventsPage extends BasePage {
     }
 
     public Select repeatOnList(){
-        return new Select(repeatOnOptions);
+        return new Select(repeatOnDailyOptions);
+    }
+
+    public Select repeatOnMonthlyList(){
+        return new Select(repeatOnMonthlyOptions);
     }
 
 

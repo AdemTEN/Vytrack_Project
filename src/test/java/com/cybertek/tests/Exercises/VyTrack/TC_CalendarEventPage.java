@@ -49,15 +49,53 @@ public class TC_CalendarEventPage extends TestBase {
 
         Select repeatOnDropdown = createCalendarEventsPage.repeatOnList();
         List<WebElement> optionsRepeatOn = repeatOnDropdown.getOptions();
+        for (WebElement webElement : optionsRepeatOn) {
+            System.out.println("webElement.getText() = " + webElement.getAttribute("title"));
+        }
 
         List<String> expectedRepetOnList = Arrays.asList("S","M","T","W","T","F","S");
 
-        List<String> actualRepeatOnList = BrowserUtils.getElementsText(optionsRepeatOn);
-        Assert.assertEquals(actualRepeatOnList, expectedRepetOnList);
+       List<String> actualRepeatOnList = BrowserUtils.getElementsgetAttribute(optionsRepeatOn);
+        /*
+        List<String > actualRepeatOnList = new ArrayList<>();
+        for (WebElement optionsREPEATOn  : optionsRepeatOn) {
+            actualRepeatOnList.add(optionsREPEATOn.getAttribute("title"));
 
+        }
+        */
+
+        Assert.assertEquals(actualRepeatOnList, expectedRepetOnList);
+    }
+    @Test
+    public void test2(){
+        LoginPage.loginAsUser("driver");
+        DashboardPage dashboardPage =new DashboardPage();
+
+        dashboardPage.waitUntilLoaderScreenDisappear();
+        dashboardPage.navigateToModule("Activities", "Calendar Events");
+
+        CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
+        BrowserUtils.waitFor(2);
+        calendarEventsPage.createCalendarEvent.click();
+
+        CreateCalendarEventsPage createCalendarEventsPage = new CreateCalendarEventsPage();
+        calendarEventsPage.waitUntilLoaderScreenDisappear();
+        createCalendarEventsPage.repeat.click();
+
+        createCalendarEventsPage.monthly.click();
+
+        Select monthlyRepeatOnDropdown = createCalendarEventsPage.repeatOnMonthlyList();
+        List<WebElement> monthlyOptions = monthlyRepeatOnDropdown.getOptions();
+        for (WebElement monthlyOption : monthlyOptions) {
+            System.out.println("monthlyOption.getText() = " + monthlyOption.getText());
+        }
+        List<String> expectedList = Arrays.asList("Day","━━━━━━━━━","First","Second", "Third","Fourth", "Last");
+        List<String> actualList = BrowserUtils.getElementsText(monthlyOptions);
+        Assert.assertEquals(actualList,expectedList);
 
 
     }
+
 
 
 }
