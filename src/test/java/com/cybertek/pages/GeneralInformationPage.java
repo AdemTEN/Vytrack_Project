@@ -8,4 +8,7 @@ public class GeneralInformationPage extends BasePage {
 
     @FindBy(xpath = "//*[@class='user-name'][contains(text(),'Mike Smith Mclaren Hamilton 25250')]")
     public WebElement headerOfContract;
+
+    @FindBy(linkText = "Vehicle Contract")
+    public WebElement vehicleContractLink;
 }

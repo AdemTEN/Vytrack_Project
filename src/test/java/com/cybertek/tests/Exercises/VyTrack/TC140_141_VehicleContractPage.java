@@ -137,6 +137,11 @@ public class TC140_141_VehicleContractPage extends TestBase {
         System.out.println("generalInformationPage.headerOfContract.getText() = " + generalInformationPage.headerOfContract.getText());
         Assert.assertEquals(generalInformationPage.headerOfContract.getText(),"Mike Smith Mclaren Hamilton 25250","verify header");
 
+        BrowserUtils.clickWithJS(generalInformationPage.vehicleContractLink);
+         BrowserUtils.waitFor(3);
+        Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
+
+        BrowserUtils.clickWithJS(vehicleContractsPage.nextButton);
     }
 
 

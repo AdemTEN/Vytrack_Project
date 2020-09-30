@@ -9,6 +9,9 @@ public class VehicleContractsPage extends BasePage {
     @FindBy(css = "[class='btn main-group btn-primary pull-right ']")
     public WebElement createVehicleContract;
 
+    @FindBy(xpath = "//i[contains(text(),'Next')]")
+    public WebElement nextButton;
+
 
 
 

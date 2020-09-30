@@ -114,6 +114,7 @@ public class CreateVehicleContractPage extends BasePage {
 
 
 
+
     public Select typeOptionsList(){
         return new Select(typeOptions);
     }
