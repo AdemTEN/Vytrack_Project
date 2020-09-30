@@ -100,9 +100,6 @@ public class TC_CalendarEventPage extends TestBase {
         Assert.assertTrue(createCalendarEventsPage.First.isSelected());
 */
 
-
-
-
     }
 
 
