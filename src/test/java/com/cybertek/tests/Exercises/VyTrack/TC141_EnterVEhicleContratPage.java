@@ -52,7 +52,7 @@ public class TC141_EnterVEhicleContratPage extends TestBase2ForExercise {
        date.sendKeys(invoiceDate);
 
        driver.findElement(By.xpath("//input[contains(@id,'date_selector_custom_entity_type_ContractStartDate-uid-')]")).sendKeys(startDate);
-        driver.findElement(By.xpath("//input[contains(@id,'date_selector_custom_entity_type_ContractExpirationDate-uid-')]")).sendKeys(ExpirationDate);
+       driver.findElement(By.xpath("//input[contains(@id,'date_selector_custom_entity_type_ContractExpirationDate-uid-')]")).sendKeys(ExpirationDate);
 
 
         WebElement vendorInputBox = driver.findElement(By.cssSelector("[name='custom_entity_type[Vendor]']"));
