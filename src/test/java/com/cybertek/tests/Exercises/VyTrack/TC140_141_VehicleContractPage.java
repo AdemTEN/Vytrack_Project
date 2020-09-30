@@ -36,11 +36,11 @@ public class TC140_141_VehicleContractPage extends TestBase {
         Assert.assertEquals(dashboardPage.getUserName(),"Judy Gerhold");
 
         dashboardPage.navigateToModule("Fleet", "Vehicle Contracts");
-
+        BrowserUtils.waitFor(3);
         VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
         //verify Vehicle Contract Page subtitle
         Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
-
+        BrowserUtils.waitFor(4);
         //click Create Vehicle Contract button
         BrowserUtils.clickWithJS(vehicleContractsPage.createVehicleContract);
 
@@ -111,18 +111,35 @@ public class TC140_141_VehicleContractPage extends TestBase {
         BrowserUtils.clickWithJS(createVehicleContractPage.vehicleModelLink);
         BrowserUtils.clickWithJS(createVehicleContractPage.vehicleModelAdd);
 
-        BrowserUtils.clickWithJS(createVehicleContractPage.firstModel);
-        Assert.assertTrue(createVehicleContractPage.firstModel.isSelected());
+        BrowserUtils.clickWithJS(createVehicleContractPage.firstAssigned);
+        Assert.assertTrue(createVehicleContractPage.firstAssigned.isSelected());
 
-        //select Model
+        //select first Model
         BrowserUtils.clickWithJS(createVehicleContractPage.selectButton);
 
+        //verify Model Name is displayed
+        Assert.assertTrue(createVehicleContractPage.modelName.isDisplayed());
 
+        BrowserUtils.clickWithJS(createVehicleContractPage.vehicleModelLink);
+        BrowserUtils.clickWithJS(createVehicleContractPage.vehicleMakeAdd);
 
+        BrowserUtils.clickWithJS(createVehicleContractPage.firstAssigned);
+        Assert.assertTrue(createVehicleContractPage.firstAssigned.isSelected());
 
+        //select first Make
+        BrowserUtils.clickWithJS(createVehicleContractPage.selectButton);
+        //verify Make is displayed
+        Assert.assertTrue(createVehicleContractPage.make.isDisplayed());
 
+        BrowserUtils.clickWithJS(createVehicleContractPage.saveAndCloseButton);
+
+        GeneralInformationPage generalInformationPage = new GeneralInformationPage();
+        System.out.println("generalInformationPage.headerOfContract.getText() = " + generalInformationPage.headerOfContract.getText());
+        Assert.assertEquals(generalInformationPage.headerOfContract.getText(),"Mike Smith Mclaren Hamilton 25250","verify header");
 
     }
+
+
 
 
 }

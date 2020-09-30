@@ -94,10 +94,20 @@ public class CreateVehicleContractPage extends BasePage {
     public WebElement vehicleMakeAdd;
 
     @FindBy(xpath = "//tbody/tr[1]/td[1]/input[1]")
-    public WebElement firstModel;
+    public WebElement firstAssigned;
 
     @FindBy(xpath = "//button[contains(text(),'Select')]")
     public WebElement selectButton;
+
+    @FindBy(xpath = "//div[contains(text(),'Model Name:')]")
+    public WebElement modelName;
+
+    @FindBy(xpath = "//div[contains(text(),'Make:')]")
+    public WebElement make;
+
+    @FindBy(xpath = "(//button[@type='submit'][contains(text(),'Save and Close')])[1]")
+    public WebElement saveAndCloseButton;
+
 
 
 
@@ -115,5 +125,8 @@ public class CreateVehicleContractPage extends BasePage {
     public Select statusOptionsList(){
         return new Select(status);
     }
+
+
+
 
 }
