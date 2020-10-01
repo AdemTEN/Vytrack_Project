@@ -120,17 +120,20 @@ public class TC_141_VehicleContractPage extends TestBase {
         BrowserUtils.clickWithJS(createVehicleContractPage.selectButton);
         //verify Make is displayed
         Assert.assertTrue(createVehicleContractPage.make.isDisplayed());
-
+        //click Save And Close Button
         BrowserUtils.clickWithJS(createVehicleContractPage.saveAndCloseButton);
 
         GeneralInformationPage generalInformationPage = new GeneralInformationPage();
         System.out.println("generalInformationPage.headerOfContract.getText() = " + generalInformationPage.headerOfContract.getText());
+        //Verify Contract is Displayed
         Assert.assertEquals(generalInformationPage.headerOfContract.getText(),"Mike Smith Mclaren Hamilton 25250","verify header");
 
+        //Go to All Vehicle Contract Page
         BrowserUtils.clickWithJS(generalInformationPage.vehicleContractLink);
         BrowserUtils.waitFor(2);
         Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
 
+        //Get the number of Pages
         System.out.println("vehicleContractsPage.numberOfPage.getText() = " + vehicleContractsPage.numberOfPage.getText());
         String numberOfPage = vehicleContractsPage.numberOfPage.getText();
 
@@ -140,11 +143,13 @@ public class TC_141_VehicleContractPage extends TestBase {
 
         int number = Integer.parseInt(pagenumber[1]);
         System.out.println("number = " + number);
+        //Click the next Button 'number of page -1' times
 
         for (int i = 1; i < number ; i++) {
             BrowserUtils.clickWithJS(vehicleContractsPage.nextButton);
         }
 
+        //verify Vehicle Contract is Displayed on the grid
         BrowserUtils.waitFor(3);
         System.out.println("vehicleContractsPage.allrows.getText() = " + vehicleContractsPage.allrows.getText());
 
