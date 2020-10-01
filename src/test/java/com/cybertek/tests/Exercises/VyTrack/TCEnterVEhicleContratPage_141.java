@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TC141_EnterVEhicleContratPage extends TestBase2ForExercise {
+public class TCEnterVEhicleContratPage_141 extends TestBase2ForExercise {
 
 
 

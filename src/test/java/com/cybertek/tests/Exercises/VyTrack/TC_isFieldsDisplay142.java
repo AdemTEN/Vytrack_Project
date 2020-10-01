@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TC142_isFieldsDisplay extends TestBase2ForExercise {
+public class TC_isFieldsDisplay142 extends TestBase2ForExercise {
 
     @Test
     public void isDisplayAllSelectedFields() throws InterruptedException {
