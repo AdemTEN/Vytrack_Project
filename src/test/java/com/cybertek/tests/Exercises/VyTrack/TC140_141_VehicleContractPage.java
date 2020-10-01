@@ -27,20 +27,10 @@ public class TC140_141_VehicleContractPage extends TestBase {
     @Test(dataProvider = "contract")
     public void testCase141(String responsible, String activationCost, String costAmount, String odometer,
                             String invoiceDate, String  startDate, String expirationDate,   String  vendor, String Driver, String reference, String termsAndConditions){
-        LoginPage.loginAsUser("storemanager");
 
 
-
-        DashboardPage dashboardPage = new DashboardPage();
-        //verify user name
-        Assert.assertEquals(dashboardPage.getUserName(),"Judy Gerhold");
-
-        dashboardPage.navigateToModule("Fleet", "Vehicle Contracts");
-        BrowserUtils.waitFor(3);
         VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
-        //verify Vehicle Contract Page subtitle
-        Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
-        BrowserUtils.waitFor(4);
+
         //click Create Vehicle Contract button
         BrowserUtils.clickWithJS(vehicleContractsPage.createVehicleContract);
 
