@@ -12,6 +12,13 @@ public class VehicleContractsPage extends BasePage {
     @FindBy(xpath = "//i[contains(text(),'Next')]")
     public WebElement nextButton;
 
+    @FindBy(xpath = "//label[contains(text(),'of 2 |')]")
+    public WebElement numberOfPage;
+
+    @FindBy(xpath = "//tbody")
+    public WebElement allrows;
+
+
 
 
 
