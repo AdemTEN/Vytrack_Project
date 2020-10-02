@@ -1,5 +1,8 @@
 package com.cybertek.tests;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.cybertek.pages.DashboardPage;
 import com.cybertek.pages.LoginPage;
 import com.cybertek.pages.VehicleContractsPage;
@@ -10,8 +13,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +25,32 @@ public class TestBase {
     protected WebDriver driver;
     protected Actions actions;
     protected WebDriverWait wait;
+    //this class is used for starting nad building reports
+    protected ExtentReports report;
+    //this class is used to create HTML report file
+    protected ExtentHtmlReporter htmlReporter;
+    //this will  define a test, enables adding logs, authors, test steps
+    protected ExtentTest extentLogger;
+
+    @BeforeTest
+    public void setUpTest(){
+        //initialize the class
+        report = new ExtentReports();
+        //create a report path
+        String projectPath = System.getProperty("user.dir");
+        String path = projectPath + "/test-output/report.html";
+        //initialize the html reporter with the report path
+        htmlReporter = new ExtentHtmlReporter(path);
+        //attach the html report to report object
+        report.attachReporter(htmlReporter);
+        //title in report
+        htmlReporter.config().setReportName("VyTrack Smoke Test");
+        //set environment information
+        report.setSystemInfo("Environment", "QA");
+        report.setSystemInfo("Browser", ConfigurationReader.get("browser"));
+        report.setSystemInfo("OS", System.getProperty("os.name"));
+
+    }
 
 
     @BeforeMethod
@@ -29,7 +61,7 @@ public class TestBase {
         actions = new Actions(driver);
         wait = new WebDriverWait(driver,10);
         driver.get(ConfigurationReader.get("url"));
-
+/*
         LoginPage.loginAsUser("storemanager");
 
         DashboardPage dashboardPage = new DashboardPage();
@@ -42,16 +74,26 @@ public class TestBase {
         VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
         //verify Vehicle Contract Page subtitle
         Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
-
-
-
-
+*/
     }
 
     @AfterMethod
-    public void tearDown() throws InterruptedException {
+    public void tearDown(ITestResult result) throws InterruptedException {
+
+        if(result.getStatus()==ITestResult.FAILURE){
+
+            extentLogger.fail(result.getName());
+
+        }
+
         Thread.sleep(2000);
         //Driver.closeDriver();
+    }
+
+    @AfterTest
+    public void tearDownTest(){
+        //this is when the report is actually created
+        report.flush();
     }
 
 }
