@@ -5,12 +5,13 @@ import com.cybertek.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TC140 extends TestBase {
+public class TC_140 extends TestBase {
     @Test
-    public void TC140(){
-
-
+    public void TC140AccesVehicleContractPage(){
         //Pre-Condition
+        extentLogger.pass("PASS");
+
+
 
     }
 

@@ -28,18 +28,19 @@ public class TC_141_VehicleContractPage extends TestBase {
     public void testCase141(String responsible, String activationCost, String costAmount, String odometer,
                             String invoiceDate, String  startDate, String expirationDate,   String  vendor, String Driver, String reference, String termsAndConditions){
 
+        extentLogger = report.createTest("Creation of Vehicle Contract");
 
         VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
 
-        //click Create Vehicle Contract button
+        extentLogger.info("click Create Vehicle Contract button");
         BrowserUtils.clickWithJS(vehicleContractsPage.createVehicleContract);
 
         CreateVehicleContractPage createVehicleContractPage = new CreateVehicleContractPage();
 
-        //verify header of Create Vehicle Page
+        extentLogger.info("verify header of Create Vehicle Page");
         Assert.assertEquals(createVehicleContractPage.headerOfPage.getText(),"Create Vehicle Contract","verify header");
 
-        //verify type Options
+        extentLogger.info("verify type Options");
         Select typeDropdown = createVehicleContractPage.typeOptionsList();
         List<WebElement> typeOptions = typeDropdown.getOptions();
 
@@ -52,16 +53,16 @@ public class TC_141_VehicleContractPage extends TestBase {
         List<String> actualTypeList = BrowserUtils.getElementsText(typeOptions);
 
         Assert.assertEquals(actualTypeList,expectedTypeList,"verify type options");
-        //select Credit Card
+        extentLogger.info("select Credit Card");
         typeDropdown.selectByVisibleText("Credit Card");
-        //verify Credit Card is selected
+        extentLogger.info("verify Credit Card is selected");
         Assert.assertTrue(createVehicleContractPage.creditCardOption.isSelected());
 
         createVehicleContractPage.responsible.sendKeys(responsible);
         createVehicleContractPage.activationCost.sendKeys(activationCost);
         createVehicleContractPage.depreciatedCost.sendKeys(costAmount);
 
-        //verify Cost Amount Options
+        extentLogger.info("verify Cost Amount Options");
         Select costAmountDropdown = createVehicleContractPage.costAmountOptionsList();
         List<WebElement> costAmountOptions = costAmountDropdown.getOptions();
         for (WebElement costAmountOption : costAmountOptions) {
@@ -73,9 +74,9 @@ public class TC_141_VehicleContractPage extends TestBase {
         Assert.assertEquals(actualCostAmountOptions,expectedCostAmountList,"verify cost Amount Options");
 
         costAmountDropdown.selectByVisibleText("Monthly");
-        //verify monthly is selected
+        extentLogger.info("verify monthly is selected");
         Assert.assertTrue(createVehicleContractPage.monhtly.isSelected());
-
+        extentLogger.info("Enter informations of input boxes");
         createVehicleContractPage.odometer.sendKeys(odometer);
         createVehicleContractPage.invoiceDate.sendKeys(invoiceDate);
         createVehicleContractPage.startDate.sendKeys(startDate);
@@ -86,7 +87,7 @@ public class TC_141_VehicleContractPage extends TestBase {
         createVehicleContractPage.termsAndCondition.sendKeys(termsAndConditions);
 
 
-        //verify status Options
+        extentLogger.info("verify status Options");
         Select statusDropdown = createVehicleContractPage.statusOptionsList();
         List<WebElement> statusOptions = statusDropdown.getOptions();
         List<String> expectedStatusList = Arrays.asList("","Active","Archived");
@@ -94,20 +95,20 @@ public class TC_141_VehicleContractPage extends TestBase {
         List<String> actualStatusList = BrowserUtils.getElementsText(statusOptions);
         Assert.assertEquals(actualStatusList,expectedStatusList,"verify status options");
 
-        //verify Active status is selected
+        extentLogger.info("verify Active status is selected");
         statusDropdown.selectByVisibleText("Active");
         Assert.assertTrue(createVehicleContractPage.active.isSelected());
-        //add vehicle models
+        extentLogger.info("add vehicle models");
         BrowserUtils.clickWithJS(createVehicleContractPage.vehicleModelLink);
         BrowserUtils.clickWithJS(createVehicleContractPage.vehicleModelAdd);
 
         BrowserUtils.clickWithJS(createVehicleContractPage.firstAssigned);
         Assert.assertTrue(createVehicleContractPage.firstAssigned.isSelected());
 
-        //select first Model
+        extentLogger.info("select first Model");
         BrowserUtils.clickWithJS(createVehicleContractPage.selectButton);
 
-        //verify Model Name is displayed
+        extentLogger.info("verify Model Name is displayed");
         Assert.assertTrue(createVehicleContractPage.modelName.isDisplayed());
 
         BrowserUtils.clickWithJS(createVehicleContractPage.vehicleModelLink);
@@ -116,24 +117,24 @@ public class TC_141_VehicleContractPage extends TestBase {
         BrowserUtils.clickWithJS(createVehicleContractPage.firstAssigned);
         Assert.assertTrue(createVehicleContractPage.firstAssigned.isSelected());
 
-        //select first Make
+        extentLogger.info("select first Make");
         BrowserUtils.clickWithJS(createVehicleContractPage.selectButton);
-        //verify Make is displayed
+        extentLogger.info("verify Make is displayed");
         Assert.assertTrue(createVehicleContractPage.make.isDisplayed());
-        //click Save And Close Button
+        extentLogger.info("click Save And Close Button");
         BrowserUtils.clickWithJS(createVehicleContractPage.saveAndCloseButton);
 
         GeneralInformationPage generalInformationPage = new GeneralInformationPage();
         System.out.println("generalInformationPage.headerOfContract.getText() = " + generalInformationPage.headerOfContract.getText());
-        //Verify Contract is Displayed
+        extentLogger.info("Verify Contract is Displayed");
         Assert.assertEquals(generalInformationPage.headerOfContract.getText(),"Mike Smith Mclaren Hamilton 25250","verify header");
 
-        //Go to All Vehicle Contract Page
+        extentLogger.info("Go to All Vehicle Contract Page");
         BrowserUtils.clickWithJS(generalInformationPage.vehicleContractLink);
         BrowserUtils.waitFor(2);
         Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
 
-        //Get the number of Pages
+        extentLogger.info("Get the number of Pages");
         System.out.println("vehicleContractsPage.numberOfPage.getText() = " + vehicleContractsPage.numberOfPage.getText());
         String numberOfPage = vehicleContractsPage.numberOfPage.getText();
 
@@ -143,18 +144,19 @@ public class TC_141_VehicleContractPage extends TestBase {
 
         int number = Integer.parseInt(pagenumber[1]);
         System.out.println("number = " + number);
-        //Click the next Button 'number of page -1' times
+        extentLogger.info("Click the next Button 'number of page -1' times");
 
         for (int i = 1; i < number ; i++) {
             BrowserUtils.clickWithJS(vehicleContractsPage.nextButton);
         }
 
-        //verify Vehicle Contract is Displayed on the grid
+
         BrowserUtils.waitFor(3);
         System.out.println("vehicleContractsPage.allrows.getText() = " + vehicleContractsPage.allrows.getText());
-
+        extentLogger.info("verify Vehicle Contract is Displayed on the grid");
         Assert.assertTrue(vehicleContractsPage.allrows.getText().contains("Mclaren"));
 
+        extentLogger.info("PASS");
 
 
     }

@@ -69,20 +69,22 @@ public class TestBase {
         actions = new Actions(driver);
         wait = new WebDriverWait(driver,10);
         driver.get(ConfigurationReader.get("url"));
-/*
+
+        extentLogger = report.createTest("Access Vehicle Contract Page");
         LoginPage.loginAsUser("storemanager");
 
         DashboardPage dashboardPage = new DashboardPage();
-        //verify user name
+        extentLogger.info("verify user name");
         Assert.assertEquals(dashboardPage.getUserName(),"Judy Gerhold");
 
+        extentLogger.info("Move to Fleet and Click Vehicle Contract");
         dashboardPage.navigateToModule("Fleet", "Vehicle Contracts");
         BrowserUtils.waitFor(3);
 
         VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
-        //verify Vehicle Contract Page subtitle
+        extentLogger.info("verify Vehicle Contract Page subtitle");
         Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
-*/
+
     }
 
     //ITestResult class describes the result of a test in TestNG
