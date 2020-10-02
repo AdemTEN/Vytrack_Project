@@ -19,6 +19,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
@@ -38,6 +41,11 @@ public class TestBase {
         report = new ExtentReports();
         //create a report path
         String projectPath = System.getProperty("user.dir");
+        /*
+        to take separate report
+        String date = new SimpleDateFormat("yyyyMMdd_hhmmss").format(new Date());
+        String path = projectPath + "/test-output/report" + date + ".html";
+        */
         String path = projectPath + "/test-output/report.html";
         //initialize the html reporter with the report path
         htmlReporter = new ExtentHtmlReporter(path);
@@ -77,12 +85,19 @@ public class TestBase {
 */
     }
 
+    //ITestResult class describes the result of a test in TestNG
     @AfterMethod
-    public void tearDown(ITestResult result) throws InterruptedException {
-
+    public void tearDown(ITestResult result) throws InterruptedException, IOException {
+        //if test fails
         if(result.getStatus()==ITestResult.FAILURE){
-
+            //record the name of failed test case
             extentLogger.fail(result.getName());
+            //take the screenshot and return location of screenshot
+            String screenShotPath = BrowserUtils.getScreenshot(result.getName());
+            //add your screenshot to your report
+            extentLogger.addScreenCaptureFromPath(screenShotPath);
+            //capture the exception and put inside the report
+            extentLogger.fail(result.getThrowable());
 
         }
 
