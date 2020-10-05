@@ -2,6 +2,7 @@ package com.cybertek.tests.day14_extent_reports;
 
 import com.cybertek.pages.LoginPage;
 import com.cybertek.tests.TestBase;
+import com.cybertek.tests.TestBaseForDays;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

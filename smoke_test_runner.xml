@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="VyTrack Automation " verbose="1">
+    <test name="VyTrack Smoke Test">
+        <packages>
+            <package name="com.cybertek.tests.day13_pom"></package>
+            <package name="com.cybertek.tests.day14_extent_reports"></package>
+            <package name="com.cybertek.tests.day15_review"></package>
+        </packages>
+        <classes>
+            <class name="com.cybertek.tests.day13_pom.PageSubtitleTest"></class>
+            <class name="com.cybertek.tests.day13_pom.RepeatOptionsTests">
+                <methods>
+                    <include name="test3"></include>
+                    <include name="test1"></include>
+                </methods>
+            </class>
+            <class name="com.cybertek.tests.day13_pom.PageSubtitleTest">
+                <methods>
+                    <exclude name="test1"></exclude>
+                </methods>
+            </class>
+        </classes>
+
+
+    </test>
+</suite>

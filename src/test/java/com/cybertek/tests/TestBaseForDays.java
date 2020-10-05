@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class TestBaseForDays {
     protected WebDriver driver;
     protected Actions actions;
     protected WebDriverWait wait;
@@ -73,17 +73,6 @@ public class TestBase {
         extentLogger = report.createTest("Access Vehicle Contract Page");
         LoginPage.loginAsUser("salesmanager");
 
-        DashboardPage dashboardPage = new DashboardPage();
-        extentLogger.info("verify user name");
-        Assert.assertEquals(dashboardPage.getUserName(),"Judy Gerhold");
-
-        extentLogger.info("Move to Fleet and Click Vehicle Contract");
-        dashboardPage.navigateToModule("Fleet", "Vehicle Contracts");
-        BrowserUtils.waitFor(3);
-
-        VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
-        extentLogger.info("verify Vehicle Contract Page subtitle");
-        Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
 
     }
 
