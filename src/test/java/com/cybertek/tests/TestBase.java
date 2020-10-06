@@ -75,7 +75,7 @@ public class TestBase {
 
         DashboardPage dashboardPage = new DashboardPage();
         extentLogger.info("verify user name");
-        Assert.assertEquals(dashboardPage.getUserName(),"Judy Gerhold");
+        Assert.assertEquals(dashboardPage.getUserName(),"Coy Pollich");
 
         extentLogger.info("Move to Fleet and Click Vehicle Contract");
         dashboardPage.navigateToModule("Fleet", "Vehicle Contracts");
