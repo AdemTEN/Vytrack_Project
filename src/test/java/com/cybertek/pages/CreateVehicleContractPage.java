@@ -109,7 +109,11 @@ public class CreateVehicleContractPage extends BasePage {
     public WebElement saveAndCloseButton;
 
 
+    @FindBy(xpath = "//label[contains(text(),'Service')]")
+    public WebElement service;
 
+    @FindBy(xpath = "//a[@title='Cancel'][//a[contains(text(),'Cancel')]]")
+    public WebElement cancelButton;
 
 
 

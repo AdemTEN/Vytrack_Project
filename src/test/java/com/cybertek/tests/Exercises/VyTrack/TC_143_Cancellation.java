@@ -1,6 +1,10 @@
 package com.cybertek.tests.Exercises.VyTrack;
 
+import com.cybertek.pages.CreateVehicleContractPage;
+import com.cybertek.pages.VehicleContractsPage;
+import com.cybertek.tests.TestBase;
 import com.cybertek.tests.TestBase2ForExercise;
+import com.cybertek.utilities.BrowserUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -9,23 +13,22 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class TC_143_Cancellation extends TestBase2ForExercise {
+public class TC_143_Cancellation extends TestBase {
 
     @Test
-    public void tc143(){
+    public void tC143_Cancellation(){
 
-        WebElement createbutton = driver.findElement(By.cssSelector(".btn.main-group.btn-primary.pull-right "));
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click();", createbutton);
+        VehicleContractsPage vehicleContractsPage = new VehicleContractsPage();
+        BrowserUtils.clickWithJS(vehicleContractsPage.createVehicleContract);
+
+        CreateVehicleContractPage createVehicleContractPage = new CreateVehicleContractPage();
+        BrowserUtils.clickWithJS(createVehicleContractPage.cancelButton);
+        BrowserUtils.waitFor(2);
+        Assert.assertEquals(vehicleContractsPage.getPageSubTitle(),"All Vehicle Contract","verify subtitle");
 
 
-        driver.findElement(By.cssSelector("[name='custom_entity_type[Responsible]']")).sendKeys("Marco");
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        WebElement cancel = driver.findElement(By.cssSelector(".btn.back.icons-holder-text "));
-        jse.executeScript("arguments[0].click();", cancel);
 
-        WebElement header = driver.findElement(By.xpath("//h1[@class='oro-subtitle']"));
-        Assert.assertTrue(header.getText().contains("Vehicle Contract"));
+
 
     }
 
