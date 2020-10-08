@@ -3,6 +3,7 @@ package com.cybertek.tests.Exercises.VyTrack;
 import com.cybertek.pages.*;
 import com.cybertek.tests.TestBase;
 import com.cybertek.utilities.BrowserUtils;
+import com.cybertek.utilities.ExcelUtil;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -14,21 +15,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListResourceBundle;
 
-public class TC_141_VehicleContractPage_2 extends TestBase {
+public class TC_141_VehicleContractPage_3 extends TestBase {
 
     @DataProvider
     public Object [][] enterData(){
 
-        return new Object[][]{
-                {"Mike Smith", "250", "50","15000","Apr 12, 2020","May 12, 2020","Sep 12, 2020", "Mclaren", "Hamilton","25250", "extra information" },
-                {"Adem Smith", "250", "50","15000","Apr 12, 2020","May 12, 2020","Sep 12, 2020", "AdemSmith", "Hamilton","25250", "extra information"},
-                {"Olcay Smith", "250", "50","15000","Apr 12, 2020","May 12, 2020","Sep 12, 2020", "OlcaySmith", "Hamilton","25250", "extra information"}
-        };
+        ExcelUtil informations  = new ExcelUtil("src/test/resources/Vytracktestdata.xlsx","Sheet7");
+
+        String[][] dataArrayWithoutFirstRow = informations.getDataArrayWithoutFirstRow();
+
+        return dataArrayWithoutFirstRow;
+
     }
 
+
+
     @Test(dataProvider = "enterData")
-    public void testCase141(String responsible, String activationCost, String costAmount, String odometer,
-                            String invoiceDate, String  startDate, String expirationDate,   String  vendor, String Driver, String reference, String termsAndConditions){
+    public void testCase141(String responsible, String activationCost, String costAmount, String odometer, String  vendor, String Driver, String reference, String termsAndConditions){
 
         extentLogger = report.createTest("Creation of Vehicle Contract");
 
@@ -80,9 +83,7 @@ public class TC_141_VehicleContractPage_2 extends TestBase {
         Assert.assertTrue(createVehicleContractPage.monhtly.isSelected());
         extentLogger.info("Enter informations of input boxes");
         createVehicleContractPage.odometer.sendKeys(odometer);
-        createVehicleContractPage.invoiceDate.sendKeys(invoiceDate);
-        createVehicleContractPage.startDate.sendKeys(startDate);
-        createVehicleContractPage.expirationDate.sendKeys(expirationDate);
+
         createVehicleContractPage.vendor.sendKeys(vendor);
         createVehicleContractPage.driver.sendKeys(Driver);
         createVehicleContractPage.reference.sendKeys(reference);
@@ -169,3 +170,4 @@ public class TC_141_VehicleContractPage_2 extends TestBase {
 
 
 }
+
