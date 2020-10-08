@@ -17,7 +17,7 @@ public class TC_145_Setting_Button extends TestBase {
         BrowserUtils.clickWithJS(vehicleContractsPage.settingButton);
         BrowserUtils.waitFor(2);
 
-        actions.(vehicleContractsPage.firstSortIcon,vehicleContractsPage.secondSortIcon).perform();
+       // actions.(vehicleContractsPage.firstSortIcon,vehicleContractsPage.secondSortIcon).perform();
 
         // actions.moveToElement(vehicleContractsPage.firstSortIcon).clickAndHold().moveToElement(vehicleContractsPage.secondSortIcon).pause(2000).release().perform();
 

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListResourceBundle;
 
-public class TC_141_VehicleContractPage extends TestBase {
+public class TC_141_VehicleContractPage_2 extends TestBase {
 
     @DataProvider(name= "contract")
     public Object [][] enterData(){
