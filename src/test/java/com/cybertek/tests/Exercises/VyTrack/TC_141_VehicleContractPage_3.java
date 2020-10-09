@@ -80,6 +80,27 @@ public class TC_141_VehicleContractPage_3 extends TestBase {
         Assert.assertTrue(createVehicleContractPage.monhtly.isSelected());
         extentLogger.info("Enter informations of input boxes");
         createVehicleContractPage.odometer.sendKeys(odometer);
+
+        BrowserUtils.clickWithJS(createVehicleContractPage.invoiceDate);
+        Select invoiceDateDropDown = new Select(createVehicleContractPage.month);
+        invoiceDateDropDown.selectByValue("5");
+        invoiceDateDropDown= new Select(createVehicleContractPage.year);
+        invoiceDateDropDown.selectByValue("2019");
+        BrowserUtils.clickWithJS(createVehicleContractPage.day);
+
+        BrowserUtils.waitFor(1);
+        BrowserUtils.clickWithJS(createVehicleContractPage.startDate);
+        BrowserUtils.clickWithJS(createVehicleContractPage.todayButton);
+
+        BrowserUtils.waitFor(1);
+        BrowserUtils.clickWithJS(createVehicleContractPage.expirationDate);
+        Select expirationDropdown = new Select(createVehicleContractPage.month);
+        expirationDropdown.selectByValue("11");
+        expirationDropdown = new Select(createVehicleContractPage.year);
+        expirationDropdown.selectByValue("2021");
+        BrowserUtils.clickWithJS(createVehicleContractPage.day);
+        BrowserUtils.waitFor(1);
+
         createVehicleContractPage.vendor.sendKeys(vendor);
         createVehicleContractPage.driver.sendKeys(Driver);
         createVehicleContractPage.reference.sendKeys(reference);

@@ -41,6 +41,19 @@ public class CreateVehicleContractPage extends BasePage {
     @FindBy(xpath = "//input[contains(@id,'date_selector_custom_entity_type_InoviceDate-uid-')]")
     public WebElement invoiceDate;
 
+    @FindBy(css = ".ui-datepicker-month")
+    public WebElement month;
+
+    @FindBy(css = ".ui-datepicker-year")
+    public WebElement year;
+
+    @FindBy(xpath = "(//a[@class='ui-state-default'])[1]")
+    public WebElement day;
+
+    @FindBy(xpath = "//button[contains(text(),'Today')]")
+    public WebElement todayButton;
+
+
     @FindBy(xpath = "//input[contains(@id,'date_selector_custom_entity_type_ContractStartDate-uid-')]")
     public WebElement startDate;
 
@@ -118,7 +131,7 @@ public class CreateVehicleContractPage extends BasePage {
 
 
 
-//option method
+    //option method
     public Select typeOptionsList(){
         return new Select(typeOptions);
     }
