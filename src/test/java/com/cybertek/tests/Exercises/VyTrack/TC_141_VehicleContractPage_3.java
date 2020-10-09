@@ -20,15 +20,12 @@ public class TC_141_VehicleContractPage_3 extends TestBase {
     @DataProvider
     public Object [][] enterData(){
 
-        ExcelUtil informations  = new ExcelUtil("src/test/resources/Vytracktestdata.xlsx","Sheet7");
+        ExcelUtil blabla = new ExcelUtil("src/test/resources/Vytracktestdata.xlsx","Sheet7");
+        String [][] dataArray = blabla.getDataArrayWithoutFirstRow();
+        return dataArray;
 
-        String[][] dataArrayWithoutFirstRow = informations.getDataArrayWithoutFirstRow();
-
-        return dataArrayWithoutFirstRow;
 
     }
-
-
 
     @Test(dataProvider = "enterData")
     public void testCase141(String responsible, String activationCost, String costAmount, String odometer, String  vendor, String Driver, String reference, String termsAndConditions){
@@ -83,7 +80,6 @@ public class TC_141_VehicleContractPage_3 extends TestBase {
         Assert.assertTrue(createVehicleContractPage.monhtly.isSelected());
         extentLogger.info("Enter informations of input boxes");
         createVehicleContractPage.odometer.sendKeys(odometer);
-
         createVehicleContractPage.vendor.sendKeys(vendor);
         createVehicleContractPage.driver.sendKeys(Driver);
         createVehicleContractPage.reference.sendKeys(reference);
@@ -170,4 +166,3 @@ public class TC_141_VehicleContractPage_3 extends TestBase {
 
 
 }
-
