@@ -71,7 +71,7 @@ public class TestBaseForDays {
         driver.get(ConfigurationReader.get("url"));
 
         extentLogger = report.createTest("Access Vehicle Contract Page");
-        LoginPage.loginAsUser("salesmanager");
+        LoginPage.loginAsUser("storemanager");
 
 
     }
@@ -93,7 +93,7 @@ public class TestBaseForDays {
         }
 
         Thread.sleep(2000);
-        Driver.closeDriver();
+        //Driver.closeDriver();
     }
 
     @AfterTest
