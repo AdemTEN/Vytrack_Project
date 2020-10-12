@@ -45,5 +45,26 @@ public class CalendarEventsPage extends BasePage {
         return Driver.get().findElement(By.xpath(xpath));
     }
 
+    @FindBy(xpath = "//i[contains(text(),'Next')]")
+    public WebElement nextButton;
+
+    @FindBy(xpath = "//label[contains(text(),'of')]" )
+    public WebElement numberOfPage;
+
+    @FindBy(xpath = "//label[contains(text(),'Total of')]")
+    public WebElement records;
+
+    @FindBy(xpath = "//label[contains(text(),'View per page:')]/../div/button")
+    public WebElement viewPerPageButton;
+
+    @FindBy(xpath ="//a[contains(text(),'100')]")
+    public WebElement button100;
+
+    public WebElement getRows(int rowNumber){
+        String xpath = "//tbody/tr["+rowNumber+"]";
+        return Driver.get().findElement(By.xpath(xpath));
+    }
+
+
 }
 

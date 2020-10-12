@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class TestCases1_6 extends TestBaseForDays {
 
 
@@ -71,6 +73,67 @@ public class TestCases1_6 extends TestBaseForDays {
     }
 
     @Test
+    public void testCase4(){
+
+        /*
+        1. Go to “https://qa1.vytrack.com/"
+        2. Login as a store manager
+        3. Navigate to “Activities -> Calendar Events”
+        4. Verify that number of calendar events (rows in
+        the table) is equals to number of records
+         */
+        DashboardPage dashboardPage = new DashboardPage();
+        dashboardPage.navigateToModule("Activities", "Calendar Events");
+        dashboardPage.waitUntilLoaderScreenDisappear();
+        CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
+
+        BrowserUtils.clickWithJS(calendarEventsPage.viewPerPageButton);
+        BrowserUtils.clickWithJS(calendarEventsPage.button100);
+
+        BrowserUtils.waitFor(2);
+
+        String numberOfPage = calendarEventsPage.numberOfPage.getText();
+
+        String [] pagenumber = numberOfPage.split(" ");
+
+        System.out.println("Arrays.toString(pagenumber) = " + Arrays.toString(pagenumber));
+        int number = Integer.parseInt(pagenumber[1]);
+        System.out.println("number = " + number);
+
+        String numberOfRecords = calendarEventsPage.records.getText();
+        String [] recordsNumber = numberOfRecords.split(" ");
+        System.out.println("Arrays.toString(recordsNumber) = " + Arrays.toString(recordsNumber));
+        int numberOfEvents = Integer.parseInt(recordsNumber[2]);
+
+
+        extentLogger.info("Click the next Button 'number of page -1' times");
+        int count = 0;
+        outer:
+        for (int i = 1; i <= number ; i++) {
+            if(count!=0){
+                BrowserUtils.clickWithJS(calendarEventsPage.nextButton);
+            }
+            for(int j = 1; j <= 100; j++){
+
+                calendarEventsPage.getRows(j);
+                count++;
+                if(count==numberOfEvents){
+                 break outer;
+                }
+
+            }
+
+        }
+
+        String rowNumbers = String.valueOf(count);
+        Assert.assertTrue(calendarEventsPage.records.getText().contains(rowNumbers));
+        System.out.println("numberOfEvents = " + numberOfEvents);
+        System.out.println("rowNumbers = " + rowNumbers);
+
+
+    }
+
+    @Test
     public void testCase5(){
 
        /*
@@ -98,6 +161,13 @@ public class TestCases1_6 extends TestBaseForDays {
     }
 
     @Test
+    /*
+    1. Go to “https://qa1.vytrack.com/"
+    2. Login as a store manager
+    3. Navigate to “Activities -> Calendar Events”
+    4. Select “Testers meeting”
+    5. Verify that following data is displayed:
+     */
     public void testCase6(){
         DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.navigateToModule("Activities", "Calendar Events");
