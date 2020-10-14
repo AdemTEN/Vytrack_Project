@@ -11,13 +11,14 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class TestCases1_6 extends TestBaseForDays {
 
 
     @Test
-    public void testCase1(){
+    public void testCase1() throws IOException {
       /*
         1.Go to “https://qa1.vytrack.com/"
         2.Login as a store manager
@@ -31,12 +32,13 @@ public class TestCases1_6 extends TestBaseForDays {
         CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
 
         BrowserUtils.verifyElementDisplayed(calendarEventsPage.optionsLink);
+        BrowserUtils.getScreenshot("testCase1");
 
 
     }
 
     @Test
-    public void testCase2(){
+    public void testCase2() throws IOException {
 
         /*
         1.Go to “https://qa1.vytrack.com/"
@@ -52,10 +54,11 @@ public class TestCases1_6 extends TestBaseForDays {
 
         Assert.assertEquals(calendarEventsPage.pageNumber.getAttribute("value"),"1", "Verify that page number is equals to 1");
 
+        BrowserUtils.getScreenshot("testCase2");
     }
 
     @Test
-    public void testCase3(){
+    public void testCase3() throws IOException {
 
         /*
         1.Go to “https://qa1.vytrack.com/"
@@ -70,10 +73,11 @@ public class TestCases1_6 extends TestBaseForDays {
         CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
 
         Assert.assertEquals(calendarEventsPage.perPageNumber.getText(),"25","Verify that view per page number is equals to 25");
+        BrowserUtils.getScreenshot("testCase3");
     }
 
     @Test
-    public void testCase4(){
+    public void testCase4() throws IOException {
 
         /*
         1. Go to “https://qa1.vytrack.com/"
@@ -129,12 +133,13 @@ public class TestCases1_6 extends TestBaseForDays {
         Assert.assertTrue(calendarEventsPage.records.getText().contains(rowNumbers));
         System.out.println("numberOfEvents = " + numberOfEvents);
         System.out.println("rowNumbers = " + rowNumbers);
+        BrowserUtils.getScreenshot("testCase4");
 
 
     }
 
     @Test
-    public void testCase5(){
+    public void testCase5() throws IOException {
 
        /*
        1. Go to “https://qa1.vytrack.com/"
@@ -157,6 +162,7 @@ public class TestCases1_6 extends TestBaseForDays {
             Assert.assertTrue(calendarEventsPage.isCheckBoxesSelected(i).isSelected());
 
         }
+        BrowserUtils.getScreenshot("testCase5");
 
     }
 
@@ -168,7 +174,7 @@ public class TestCases1_6 extends TestBaseForDays {
     4. Select “Testers meeting”
     5. Verify that following data is displayed:
      */
-    public void testCase6(){
+    public void testCase6() throws IOException {
         DashboardPage dashboardPage = new DashboardPage();
         dashboardPage.navigateToModule("Activities", "Calendar Events");
         dashboardPage.waitUntilLoaderScreenDisappear();
@@ -197,6 +203,8 @@ public class TestCases1_6 extends TestBaseForDays {
         Assert.assertEquals(calenderEventsInfoPage.recurrence.getText().trim(),"Weekly every 1 week on Wednesday");
 
         Assert.assertEquals(calenderEventsInfoPage.callViaHangout.getText().trim(),"No");
+
+        BrowserUtils.getScreenshot("testCase6");
     }
 
 
